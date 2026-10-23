@@ -1,10 +1,14 @@
 
+"""Main entry point for the Country Explorer CLI."""
+
 from api_fetch import fetch_countries
 import processing
 import display
 
-   
+
 def process_choice(choice, countries):
+    """Process the user's selected menu option."""
+
     if choice == "1":
         region = input(
             "Enter a region (Africa, Americas, Asia, Europe, Oceania): "
@@ -34,7 +38,9 @@ def process_choice(choice, countries):
         display.display_table(top_countries)
 
     elif choice == "3":
-        top_countries = processing.get_top_countries(countries, "population")
+        top_countries = processing.get_top_countries(
+            countries, "population"
+        )
 
         if not top_countries:
             print("No valid data is available.")
@@ -64,47 +70,29 @@ def process_choice(choice, countries):
         print("Invalid choice. Please enter a number from 1 to 5.")
 
 
-
-def display_menu():
-    """Display the menu and handle user selections."""
-    while True:
-        print("=" * 60)
-        print("         COUNTRY EXPLORER")
-        print("=" * 60)
-        print("1. Countries by region   2. Top 10 largest countries   3. Top 10 most populous countries   4. Search for a country   5. Exit")
-    
-        choice = input("\nChoose an option (1-5): ").strip()
-        # if choice == "5":
-        #     print("Thank you for using Country Explorer!")
-        #     break
-        # process_choice(choice, countries)
-        return choice
-
-
-#define main menu
 def main():
+    """Fetch country data and run the main application loop."""
+
     print("Welcome to Country Explorer CLI!")
+
     raw_countries = fetch_countries()
-    
+
     if not raw_countries:
         print("Unable to load country data. Exiting.")
         return
 
     countries = processing.transform_countries(raw_countries)
-   #print(f"Loaded {len(countries)} country records.")
+    print(f"Loaded {len(countries)} country records.")
+
     while True:
-        choice = display_menu()
+        choice = display.display_menu()
 
         if choice == "5":
             print("Thank you for using Country Explorer!")
             break
 
         process_choice(choice, countries)
-    
-   
+
+
 if __name__ == "__main__":
     main()
-
-
-
-
