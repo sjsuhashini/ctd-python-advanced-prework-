@@ -21,7 +21,7 @@ A Python command-line application that retrieves country information from the [c
 ### 1. Clone the repository
 
 Clone this repository from GitHub and open the project folder in your terminal.
-git clone [<your-github-repository-url>](https://github.com/sjsuhashini/ctd-python-advanced-prework-.git)
+git clone https://github.com/sjsuhashini/ctd-python-advanced-prework-.git
 
 ### 2. Create a virtual environment
 
