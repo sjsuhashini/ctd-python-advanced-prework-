@@ -1,44 +1,7 @@
 
 from api_fetch import fetch_countries
 import processing
-
-
-
-
-# 5. Display country information
-def display_country(country):
-    print(f"Country:    {country['name']}")
-    print(f"Capital:    {country['capital']}")
-    print(f"Region:     {country['region']}")
-    print(f"Population: {processing.format_number(country['population'])}")
-    print(f"Area:       {processing.format_number(country['area'])} km²")
-    print(f"Languages:  {country['languages']}")
-
-
-def display_table(countries):
-    """Display a compact list of countries."""
-
-    if not countries:
-        print("No matching countries found.")
-        return
-
-    print(
-        f"{'Country':<55}"
-        f"{'Population':>18}"
-        f"{'Area (km²)':>16}"
-    )
-    print("-" * 80)
-
-    for country in countries:
-        name = country["name"][:54]
-        population = processing.format_number(country["population"])
-        area = processing.format_number(country["area"])
-
-        print(
-            f"{name:<55}"
-            f"{population:>18}"
-            f"{area:>16}"
-        )
+import display
 
    
 def process_choice(choice, countries):
@@ -58,7 +21,7 @@ def process_choice(choice, countries):
             return
 
         print(f"Countries in {region.title()}:")
-        display_table(matches)
+        display.display_table(matches)
 
     elif choice == "2":
         top_countries = processing.get_top_countries(countries, "area")
@@ -68,7 +31,7 @@ def process_choice(choice, countries):
             return
 
         print("Top 10 countries by area:")
-        display_table(top_countries)
+        display.display_table(top_countries)
 
     elif choice == "3":
         top_countries = processing.get_top_countries(countries, "population")
@@ -78,7 +41,7 @@ def process_choice(choice, countries):
             return
 
         print("Top 10 countries by population:")
-        display_table(top_countries)
+        display.display_table(top_countries)
 
     elif choice == "4":
         search_term = input("\nEnter a country name: ").strip()
@@ -94,7 +57,7 @@ def process_choice(choice, countries):
             return
 
         for country in matches:
-            display_country(country)
+            display.display_country(country)
             print()
 
     else:

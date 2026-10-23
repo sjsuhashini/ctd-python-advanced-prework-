@@ -42,13 +42,6 @@ def get_number(country, field):
 
     return None
 
-def format_number(value):
-    if value is None:
-        return "N/A"
-
-    return f"{value:,.0f}"
-
-
 
 def filter_by_region(countries, region):
     """Return countries matching a region, ignoring case."""
